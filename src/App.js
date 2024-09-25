@@ -1,23 +1,21 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Header from './components/Header';
+import Login from './components/Login';
+import Register from './components/Register';
 import './App.css';
 
 function App() {
+  const [isRegister, setIsRegister] = useState(false);
+  const [isPopup, setIsPopup] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header setIsPopup={setIsPopup} />
+      <div className={`wrapper ${isPopup ? 'active-popup' : ''} ${isRegister ? 'active' : ''}`}>
+        <span className="icon-close" onClick={() => setIsPopup(false)}>&times;</span>
+        <Login setIsRegister={setIsRegister} />
+        <Register setIsRegister={setIsRegister} />
+      </div>
     </div>
   );
 }
